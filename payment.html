@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Checkout</h1>
+    </header>
+
+    <main>
+        <h2>Your Cart</h2>
+        <ul id="cartItems"></ul>
+        <h3>Total: $<span id="totalPrice">0.00</span></h3>
+        <button id="payNow">Pay Now</button>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsList = document.getElementById('cartItems');
+            const totalPriceElem = document.getElementById('totalPrice');
+            let totalPrice = 0;
+
+            cartItems.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+                cartItemsList.appendChild(listItem);
+                totalPrice += item.price;
+            });
+
+            totalPriceElem.textContent = totalPrice.toFixed(2);
+
+            document.getElementById('payNow').addEventListener('click', () => {
+                alert('Proceeding to Payment...');
+                // Payment logic can be added here
+            });
+        });
+    </script>
+</body>
+</html>
